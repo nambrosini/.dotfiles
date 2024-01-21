@@ -1,0 +1,12 @@
+[init]
+	defaultBranch = main
+[user]
+	name = Ambrosini Nico (IT-PTR-CEN1-BDE4)
+	mail = nico.ambrosini@sbb.ch
+	email = nico.ambrosini@sbb.ch
+[pull]
+	rebase = false
+[core]
+	autocrlf = input
+[commit]
+    template = /Users/nambrosini/.commitMsg

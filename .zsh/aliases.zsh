@@ -9,3 +9,5 @@ alias tf="terraform"
 alias redpanda="/opt/redpanda/Redpanda-Console-SC.sh"
 alias grep='grep --color'
 alias vim='hx'
+alias ..='cd ..'
+alias cat='bat'

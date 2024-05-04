@@ -46,4 +46,9 @@ return {
   {
     'github/copilot.vim',
   },
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    config = true,
+  },
 }

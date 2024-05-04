@@ -60,3 +60,5 @@ eval
             }
       
 eval "$(direnv hook zsh)" > /dev/null
+
+eval "$(zoxide init --cmd cd zsh)"

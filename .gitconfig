@@ -8,7 +8,21 @@
 	rebase = false
 [core]
 	autocrlf = input
+    editor = nvim
+  pager = delta
 [commit]
     template = /Users/nambrosini/.commitMsg
 [push]
 	autoSetupRemote = true
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+
+[merge]
+  confictstyle = diff3
+
+[diff]
+  colorMoved = default

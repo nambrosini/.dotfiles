@@ -32,6 +32,7 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
 
 # Load completions
@@ -72,7 +73,18 @@ if [ -f ~/.zsh/aliases.zsh ]; then
 fi
 
 # Shell integrations
+# -- FZF --
 eval "$(fzf --zsh)"
+
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
+
+# -- Zoxide --
 eval "$(zoxide init --cmd cd zsh)"
 
 eval $(thefuck --alias)

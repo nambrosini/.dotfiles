@@ -11,3 +11,4 @@ alias redpanda="/opt/redpanda/Redpanda-Console-SC.sh"
 alias grep='grep --color'
 alias cat='bat'
 alias vim='nvim'
+alias ..='cd ..'

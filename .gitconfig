@@ -1,28 +1,28 @@
 [init]
-	defaultBranch = master
+    defaultBranch = master
 [user]
-	name = Ambrosini Nico (IT-PTR-CEN1-BDE4)
-	mail = nico.ambrosini@sbb.ch
-	email = nico.ambrosini@sbb.ch
+    name = Ambrosini Nico (IT-PTR-CEN1-BDE4)
+    mail = nico.ambrosini@sbb.ch
+    email = nico.ambrosini@sbb.ch
 [pull]
-	rebase = false
+    rebase = true
 [core]
-	autocrlf = input
+    autocrlf = input
     editor = nvim
-  pager = delta
+    pager = delta
 [commit]
     template = /Users/nambrosini/.commitMsg
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
 
 [interactive]
-  diffFilter = delta --color-only
+    diffFilter = delta --color-only
 
 [delta]
-  navigate = true
+    navigate = true
 
 [merge]
-  confictstyle = diff3
+    confictstyle = diff3
 
 [diff]
-  colorMoved = default
+    colorMoved = default

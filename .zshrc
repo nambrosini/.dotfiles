@@ -89,3 +89,5 @@ _fzf_compgen_dir() {
 eval "$(zoxide init --cmd cd zsh)"
 
 eval $(thefuck --alias)
+
+export SOPS_PGP_FP=$(gpg --fingerprint | grep "2FEC 5757 8FFB 5277 1E40  8D36 950A 37FD 7688 BD8B" | cut -d'=' -f 2 | sed 's/ //g')

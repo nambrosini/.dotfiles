@@ -1,7 +1,7 @@
 # Configure .dotfiles repo
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # shortcut
-alias ls="exa --icons --group-directories-first"
+alias ls="eza --icons --group-directories-first"
 alias ll="ls -l"
 alias la="ls -la"
 alias f="fuck"

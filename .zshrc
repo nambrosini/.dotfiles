@@ -5,7 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [[ -f "/opt/homebrew/bin/brew" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
@@ -68,6 +70,10 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion;*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
 
+# Completions
+source <(kubectl completion zsh)
+source <(helm completion zsh)
+
 # Aliases
 if [ -f ~/.zsh/aliases.zsh ]; then
   source ~/.zsh/aliases.zsh
@@ -88,6 +94,38 @@ _fzf_compgen_dir() {
 # -- Zoxide --
 eval "$(zoxide init --cmd cd zsh)"
 
+# Cargo
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:$USER/.local/bin"
+
 eval $(thefuck --alias)
 
 export SOPS_PGP_FP=$(gpg --fingerprint | grep "2FEC 5757 8FFB 5277 1E40  8D36 950A 37FD 7688 BD8B" | cut -d'=' -f 2 | sed 's/ //g')
+
+# Created by `pipx` on 2024-08-13 07:11:12
+export PATH="$PATH:/Users/nambrosini/.local/bin"
+export PATH="$PATH:$HOME/.zig"
+
+
+# Herd injected NVM configuration
+export NVM_DIR="/Users/nambrosini/Library/Application Support/Herd/config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/nambrosini/Library/Application Support/Herd/config/php/83/"
+
+
+# Herd injected PHP binary.
+export PATH="/Users/nambrosini/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/nambrosini/Library/Application Support/Herd/config/php/84/"
+
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$JAVA_HOME/bin:$PATH
+export INSTALL4J_JAVA_HOME=$(/usr/libexec/java_home)
+
+source $HOME/.kafka_ticket.sh

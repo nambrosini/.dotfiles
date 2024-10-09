@@ -1,5 +1,6 @@
 [init]
     defaultBranch = master
+	templatedir = ~/.git_template
 [user]
     name = Ambrosini Nico (IT-PTR-CEN1-BDE4)
     mail = nico.ambrosini@sbb.ch
@@ -28,3 +29,17 @@
 
 [diff]
     colorMoved = default
+
+[alias]
+    a = add -u .
+    an = add .
+    br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+    co = checkout
+    cob = checkout -b
+    cm = commit -m
+    d = diff
+    del = branch -D
+    ll = log --oneline
+    s = status
+    undo = reset HEAD~1 --mixed
+

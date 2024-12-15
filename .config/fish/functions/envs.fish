@@ -1,6 +1,7 @@
 fish_add_path "$HOME/.cargo/env"
 fish_add_path "$HOME/go/bin"
 fish_add_path "$HOME/.kafka/bin"
+fish_add_path "$HOME/.zig/zig"
 
 set -x EDITOR 'nvim'
 

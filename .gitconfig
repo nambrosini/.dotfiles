@@ -1,45 +1,84 @@
+[includeIf "gitdir:~/personal/"]
+    path = "~/personal/.gitconfig"
+
+[includeIf "gitdir:~/work/"]
+    path = "~/work/.gitconfig"
+
+[includeIf "gitdir:~/.config/"]
+    path = "~/personal/.gitconfig"
+
+[column]
+    ui = auto
+
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = version:refname
+
 [init]
     defaultBranch = master
-	templatedir = ~/.git_template
-[user]
-    name = Ambrosini Nico (IT-PTR-CEN1-BDE4)
-    mail = nico.ambrosini@sbb.ch
-    email = nico.ambrosini@sbb.ch
-[pull]
-    rebase = true
-[core]
-    autocrlf = input
-    editor = nvim
-    pager = delta
-[commit]
-    template = /Users/nambrosini/.commitMsg
-[push]
-    autoSetupRemote = true
-
-[interactive]
-    diffFilter = delta --color-only
-
-[delta]
-    navigate = true
-    side-by-side = true
-    line-numbers = true
-
-[merge]
-    confictstyle = diff3
+    templatedir = ~/.git_template
 
 [diff]
-    colorMoved = default
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+
+[push]
+    default = simple
+    autoSetupRemote = true
+    followTags = true
+
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
+
+[help]
+    autocorrect = prompt
+
+[commit]
+    verbose = true
+
+[rerere]
+    enabled = true
+    autoUpdate = true
+
+
+[core]
+    excludesFile = ~/.gitignore
+    autocrlf = input
+    editor = nvim
+
+[rebase]
+    autoStash = true
+    autosquash = true
+    updateRefs = true
+
+[merge]
+    confictstyle = zdiff3
+
+[pull]
+    rebase = true
 
 [alias]
     a = add -u .
-    an = add .
+    aa = add .
     br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
     co = checkout
     cob = checkout -b
     cm = commit -m
     d = diff
     del = branch -D
+    force = push --force-with-lease
     ll = log --oneline
     s = status
+    staash = stash --all
+    ua = restore --staged
     undo = reset HEAD~1 --mixed
 
+[maintenance]
+    repo = /Users/nambrosini/personal/homelab
+    repo = /Users/nambrosini/work/kafka-platform-automation-ng

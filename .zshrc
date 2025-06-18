@@ -1,10 +1,4 @@
 export XDG_CONFIG_HOME=$HOME/.config
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 if [[ -f "/opt/homebrew/bin/brew" ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -21,9 +15,6 @@ fi
 
 # Source zinit file
 source "$ZINIT_HOME/zinit.zsh"
-
-# Add in Powerlevel10k
-# zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -74,6 +65,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
 # Completions
 source <(kubectl completion zsh)
 source <(helm completion zsh)
+source <(oc completion zsh)
+source <(arduino-cli completion zsh)
 
 # Aliases
 if [ -f ~/.zsh/aliases.zsh ]; then
@@ -130,3 +123,8 @@ export PATH=$JAVA_HOME/bin:$PATH
 export INSTALL4J_JAVA_HOME=$(/usr/libexec/java_home)
 
 source $HOME/.kafka_ticket.sh
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/nambrosini/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

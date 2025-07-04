@@ -82,3 +82,4 @@
 [maintenance]
     repo = /Users/nambrosini/personal/homelab
     repo = /Users/nambrosini/work/kafka-platform-automation-ng
+	repo = /Users/nambrosini/work/argocd

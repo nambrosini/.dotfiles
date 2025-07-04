@@ -1,0 +1,7 @@
+.DS_Store
+target/
+*.dec.yaml
+.classpath
+.factorypath
+.project
+.settings/

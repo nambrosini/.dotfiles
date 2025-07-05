@@ -1,0 +1,7 @@
+font-family = "JetBrainsMono Nerd Font"
+font-size = 22
+font-feature = liga
+theme = "catppuccin-macchiato"
+background-opacity = 0.7
+background-blur-radius = 20
+

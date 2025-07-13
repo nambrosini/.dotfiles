@@ -1,7 +1,8 @@
-[includeIf "gitdir:~/personal/"]
-    path = "~/personal/.gitconfig"
+[user]
+    name = nambrosini
+    email = nico.ambrosini@icloud.com
 
-[includeIf "gitdir:~/work/"]
+[includeIf "gitdir:~/projects/work/"]
     path = "~/work/.gitconfig"
 
 [includeIf "gitdir:~/.config/"]

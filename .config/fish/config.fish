@@ -8,7 +8,7 @@ set fish_greeting
 source $HOME/.config/fish/conf.d/starship.fish
 
 # Setup brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(/usr/local/bin/brew shellenv)"
 set -gx EDITOR nvim
 
 # setup stuff

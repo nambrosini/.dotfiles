@@ -122,7 +122,7 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH=$JAVA_HOME/bin:$PATH
 export INSTALL4J_JAVA_HOME=$(/usr/libexec/java_home)
 
-source $HOME/.kafka_ticket.sh
+# source $HOME/.kafka_ticket.sh
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/nambrosini/.docker/completions $fpath)
 autoload -Uz compinit

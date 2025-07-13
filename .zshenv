@@ -13,3 +13,4 @@ FZF_ALT_T_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 GOBIN=$HOME/go/bin
 
 MODEL_API_KEY=eRDYJ1HkRBdLtlhP2EaaevHeohFLvTTW
+. "$HOME/.cargo/env"

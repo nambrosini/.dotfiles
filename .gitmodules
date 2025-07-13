@@ -1,3 +1,6 @@
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = git@github.com:nambrosini/nvim.git
+[submodule "catppuccin/tmux"]
+	path = catppuccin/tmux
+	url = https://github.com/catppuccin/tmux.git

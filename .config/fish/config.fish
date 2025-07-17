@@ -24,3 +24,4 @@ end
 starship init fish | source
 enable_transience
 thefuck --alias | source
+zoxide init fish --cmd cd | source

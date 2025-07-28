@@ -1,0 +1,86 @@
+[user]
+    name = nambrosini
+    email = nico.ambrosini@icloud.com
+
+[includeIf "gitdir:~/projects/work/"]
+    path = "~/work/.gitconfig"
+
+[includeIf "gitdir:~/.config/"]
+    path = "~/personal/.gitconfig"
+
+[column]
+    ui = auto
+
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = version:refname
+
+[init]
+    defaultBranch = master
+    templatedir = ~/.git_template
+
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+
+[push]
+    default = simple
+    autoSetupRemote = true
+    followTags = true
+
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
+
+[help]
+    autocorrect = prompt
+
+[commit]
+    verbose = true
+
+[rerere]
+    enabled = true
+    autoUpdate = true
+
+
+[core]
+    excludesFile = ~/.gitignore
+    autocrlf = input
+    editor = nvim
+
+[rebase]
+    autoStash = true
+    autosquash = true
+    updateRefs = true
+
+[merge]
+    confictstyle = zdiff3
+
+[pull]
+    rebase = true
+
+[alias]
+    a = add -u .
+    aa = add .
+    br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+    co = checkout
+    cob = checkout -b
+    cm = commit -m
+    d = diff
+    del = branch -D
+    force = push --force-with-lease
+    ll = log --oneline
+    s = status
+    staash = stash --all
+    ua = restore --staged
+    undo = reset HEAD~1 --mixed
+
+[maintenance]
+    repo = /Users/nambrosini/personal/homelab
+    repo = /Users/nambrosini/work/kafka-platform-automation-ng
+	repo = /Users/nambrosini/work/argocd

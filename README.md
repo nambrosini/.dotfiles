@@ -1,10 +1,23 @@
-# .dotfiles
+# My Dotfiles
 
-## Installing your dotfiles onto a new system
+Personal configuration files for my Linux machines.
 
-```bash
-echo ".dotfiles" >> .gitignore
-git clone --recurse-submodules --bare git@github.com:nambrosini/.dotfiles.git $HOME/.dotfiles
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-config checkout
-```
+## 🚀 Quick Setup
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/harsh-m-patil/.dotfiles.git ~/.dotfiles
+   ```
+
+2. **Navigate to dotfiles**
+
+   ```bash
+   cd ~/.dotfiles
+   ```
+
+3. **Install configurations using GNU Stow**
+
+   ```bash
+   stow .
+   ```

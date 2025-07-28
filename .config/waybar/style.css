@@ -67,6 +67,14 @@
   padding: 4px 2px; 
   border-width: 0px;
 }
+#custom-gpu-usage{
+  background-color: rgba(15,27,53,0.9);
+  margin-top: 6px; 
+  /*margin-bottom: 4px;*/
+  padding: 4px 2px; 
+  border-width: 0px;
+}
+
 
 #custpm-temperature.critical,
 #pulseaudio.muted {

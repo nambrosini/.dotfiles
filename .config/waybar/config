@@ -18,8 +18,16 @@
     "custom/temperature",
     "memory",
     "cpu",
+    "custom/gpu-usage",
     "clock"
   ],
+  "custom/gpu-usage": {
+    "format": "{} <span color='#00FFFF'>{icon}</span>",
+    "exec": "gpu-usage-waybar",
+    "return-type": "json",
+    "format-icons": "󰾲",
+    "on-click": "ghostty -e nvtop",
+  },
   "hyprland/workspaces": {
     "disable-scroll": false,
     "all-outputs": true,
@@ -28,13 +36,6 @@
     "persistent-workspaces": {
     "*":[1,2,3,4]
     },
-    "format-icons": {
-      "1": "󰈹",
-      "2": "",
-      "3": "󰇮",
-      "4": "",
-      "default": ""
-    }
   },
   "custom/lock": {
   "format": "<span color='#00FFFF'>  </span>",

@@ -1,0 +1,9 @@
+[10:44:32 2025-07-30] FETCHING Version 2.40.11
+[10:44:32 2025-07-30] CREATING /Users/nambrosini/.spicetify
+[10:44:32 2025-07-30] DOWNLOADING https://github.com/spicetify/cli/releases/download/v2.40.11/spicetify-2.40.11-darwin-arm64.tar.gz
+[10:44:33 2025-07-30] EXTRACTING /Users/nambrosini/.spicetify/spicetify.tar.gz
+[10:44:33 2025-07-30] SETTING EXECUTABLE PERMISSIONS TO /Users/nambrosini/.spicetify/spicetify
+[10:44:33 2025-07-30] REMOVING /Users/nambrosini/.spicetify/spicetify.tar.gz
+[10:44:33 2025-07-30] APPENDING /Users/nambrosini/.spicetify to PATH in /Users/nambrosini/.config/fish/config.fish
+[10:44:33 2025-07-30] spicetify v2.40.11 was installed successfully to /Users/nambrosini/.spicetify
+[10:44:33 2025-07-30] Run 'spicetify --help' to get started

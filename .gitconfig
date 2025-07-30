@@ -2,7 +2,7 @@
     name = nambrosini
     email = nico.ambrosini@icloud.com
 
-[includeIf "gitdir:~/projects/work/"]
+[includeIf "gitdir:~/work/"]
     path = "~/work/.gitconfig"
 
 [includeIf "gitdir:~/.config/"]

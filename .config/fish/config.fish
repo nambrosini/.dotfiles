@@ -2,8 +2,6 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-set fish_greeting
-
 # Source stuff
 source $HOME/.config/fish/conf.d/starship.fish
 
@@ -21,9 +19,11 @@ set -U XDG_CONFIG_HOME "$HOME/.config"
 function starship_transient_prompt_func
     starship module character
 end
+direnv hook fish | source
 starship init fish | source
 enable_transience
 thefuck --alias | source
 zoxide init fish --cmd cd | source
 
 fish_add_path /Users/nambrosini/.spicetify
+fish_add_path ~/.local/bin/

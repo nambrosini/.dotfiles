@@ -28,14 +28,14 @@
     renames = true
 
 [push]
-    default = simple
     autoSetupRemote = true
+    default = simple
     followTags = true
 
 [fetch]
+    all = true
     prune = true
     pruneTags = true
-    all = true
 
 [help]
     autocorrect = prompt
@@ -44,18 +44,17 @@
     verbose = true
 
 [rerere]
-    enabled = true
     autoUpdate = true
-
+    enabled = true
 
 [core]
-    excludesFile = ~/.gitignore
     autocrlf = input
     editor = nvim
+    excludesFile = ~/.gitignore
 
 [rebase]
-    autoStash = true
     autosquash = true
+    autoStash = true
     updateRefs = true
 
 [merge]
@@ -68,9 +67,9 @@
     a = add -u .
     aa = add .
     br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+    cm = commit -m
     co = checkout
     cob = checkout -b
-    cm = commit -m
     d = diff
     del = branch -D
     force = push --force-with-lease
@@ -79,8 +78,9 @@
     staash = stash --all
     ua = restore --staged
     undo = reset HEAD~1 --mixed
+    wt = worktree
 
 [maintenance]
     repo = /Users/nambrosini/personal/homelab
+    repo = /Users/nambrosini/work/argocd
     repo = /Users/nambrosini/work/kafka-platform-automation-ng
-	repo = /Users/nambrosini/work/argocd

@@ -2,5 +2,5 @@
 	path = .config/nvim
 	url = git@github.com:nambrosini/nvim.git
 [submodule ".config/tmux/plugins/tmux-plugins/tmux-cpu"]
-	path = /home/nambrosini/dotfiles/.config/tmux/plugins/tmux-plugins/tmux-cpu
+	path = .config/tmux/plugins/tmux-plugins/tmux-cpu
 	url = https://github.com/tmux-plugins/tmux-cpu.git

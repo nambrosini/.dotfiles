@@ -63,12 +63,12 @@ deleted = ""
 
 [kubernetes]
 style = "bold purple"
-format = '󱃾 [$context]($style) '
+format = '[$symbol $context :: $namespace]($style) '
 disabled = false
 contexts = [
-    { context_pattern = "*kafka03t*", style = "green", symbol = "󰙨 04t" },
-    { context_pattern = "*kafka04t*", style = "cyan", symbol = "󰙨 03t" },
-    { context_pattern = "*kafka02p*", style = "red", symbol = "󰌾 02p" },
+    { context_pattern = ".*kafka03t.*", style = "green", symbol = "󰙨", context_alias = "kafka03t" },
+    { context_pattern = ".*kafka04t.*", style = "cyan", symbol = "󰙨", context_alias = "kafka04t" },
+    { context_pattern = ".*kafka02p.*", style = "red", symbol = "󰌾", context_alias = "kafka02p" },
 ]
 
 [rust]

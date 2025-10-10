@@ -1,7 +1,6 @@
 EDITOR=nvim
 
-PATH=$PATH:/opt/homebrew/Cellar/goto/2.0.0/etc/bash_completion.d:$HOME/go/bin/:$HOME/.kafka/bin:$HOME/.local/bin
-BAT_THEME=tokyonight-storm
+PATH=$PATH:/opt/homebrew/Cellar/goto/2.0.0/etc/bash_completion.d:$HOME/go/bin/:$HOME/.kafka/bin:$HOME/.local/bin:$HOME/.zig
 
 # -- Use fd instead of fzf --
 FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"

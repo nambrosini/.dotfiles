@@ -20,6 +20,7 @@ source "$ZINIT_HOME/zinit.zsh"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit light junegunn/fzf
 zinit light Aloxaf/fzf-tab
 
 # Add in snippets
@@ -42,7 +43,6 @@ zinit cdreplay -q
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/config.yaml)"
 eval "$(starship init zsh)"
 
 # Keybindings
@@ -55,13 +55,14 @@ HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
+setopt append_history
+setopt inc_append_history
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+setopt correct
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -104,7 +105,6 @@ export PATH="$PATH:$USER/.local/bin"
 
 eval $(thefuck --alias)
 export SOPS_PGP_FP=$(gpg --fingerprint | grep "2FEC 5757 8FFB 5277 1E40  8D36 950A 37FD 7688 BD8B" | cut -d'=' -f 2 | sed 's/ //g')
-export PATH="$PATH:$HOME/.zig"
 
 if [ -f /usr/libexec/java_home ]; then
   export JAVA_HOME=$(/usr/libexec/java_home)

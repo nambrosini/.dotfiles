@@ -79,6 +79,16 @@
     ua = restore --staged
     undo = reset HEAD~1 --mixed
     wt = worktree
+    wt-new = "!f() { \
+        git worktree add -b \"$2\" \"../$1\" && \
+        git ls-files --others --exclude-standard --ignored | rsync -av --files-from=- ./ \"../$1\" && \
+        tmux new-session -d -c \"../$1\" -s \"$2\"; \
+    }; f"
+    wt-add = "!f() { \
+        git worktree add \"$1\" \"$2\" && \
+        git ls-files --others --exclude-standard --ignored | rsync -av --files-from=- ./ \"$1\" && \
+        tmux new-session -d -c \"$1\" -s \"$2\"; \
+    }; f"
 
 [maintenance]
     repo = /Users/nambrosini/personal/homelab

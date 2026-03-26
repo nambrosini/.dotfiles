@@ -1,4 +1,4 @@
-font-family = "JetBrainsMono Nerd Font"
-font-size = 22
+font-family = "CaskaydiaCove Nerd Font Mono"
+font-size = 18
 font-feature = liga
-theme = "catppuccin-macchiato.conf"
+theme = TokyoNight Storm

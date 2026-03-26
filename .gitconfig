@@ -1,12 +1,7 @@
 [user]
-    name = nambrosini
-    email = nico.ambrosini@icloud.com
-
-[includeIf "gitdir:~/work/"]
-    path = "~/work/.gitconfig"
-
-[includeIf "gitdir:~/.config/"]
-    path = "~/personal/.gitconfig"
+    name = u238748
+    email = nico.ambrosini@sbb.ch
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrTBzV8luRjixzPrLg4M2zZzRhDVh5RSEATpasj86Mp
 
 [column]
     ui = auto
@@ -51,6 +46,7 @@
     autocrlf = input
     editor = nvim
     excludesFile = ~/.gitignore
+    hooksPath = /Users/nambrosini/.git-hooks
 
 [rebase]
     autosquash = true
@@ -81,6 +77,11 @@
     wt = worktree
     wt-new = "!f() { \
         git worktree add -b \"$2\" \"../$1\" && \
+        git ls-files --others --exclude-standard --ignored | rsync -av --files-from=- ./ \"../$1\" && \
+        tmux new-session -d -c \"../$1\" -s \"$2\"; \
+    }; f"
+    wt-new-b = "!f() { \
+        git worktree add -b \"$2\" \"../$1\" \"$3\" && \
         git ls-files --others --exclude-standard --ignored | rsync -av --files-from=- ./ \"../$1\" && \
         tmux new-session -d -c \"../$1\" -s \"$2\"; \
     }; f"

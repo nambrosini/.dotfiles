@@ -1,11 +1,3 @@
 [[search_dirs]]
 path = "/Users/nambrosini/personal"
 depth = 10
-
-[[search_dirs]]
-path = "/Users/nambrosini/work"
-depth = 10
-
-[[search_dirs]]
-path = "~"
-depth = 1

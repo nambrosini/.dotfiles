@@ -36,7 +36,7 @@ autoload -U compinit && compinit
 
 zinit cdreplay -q
 
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/myconfig.toml)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/myconfig.yaml)"
 
 # Keybindings
 bindkey -e
@@ -111,3 +111,8 @@ if [ -f "$HOME/.cargo/env" ]; then
 fi
 
 source ~/.zsh_secret
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion

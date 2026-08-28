@@ -1,3 +1,10 @@
+# ─── Homebrew ─────────────────────────────────────────────────────────────────
+# macOS (Apple Silicon / Intel) or Linuxbrew (Ubuntu/Arch)
+for _brew in /opt/homebrew/bin/brew /usr/local/bin/brew /home/linuxbrew/.linuxbrew/bin/brew; do
+  [[ -x "$_brew" ]] && eval "$("$_brew" shellenv)" && break
+done
+unset _brew
+
 # ─── Editor ───────────────────────────────────────────────────────────────────
 export EDITOR=nvim
 export VISUAL=nvim
@@ -5,6 +12,14 @@ export VISUAL=nvim
 # ─── Go ───────────────────────────────────────────────────────────────────────
 export GOBIN="$HOME/go/bin"
 export GOPATH="$HOME/go"
+
+# ─── Java ─────────────────────────────────────────────────────────────────────
+if [[ -x /usr/libexec/java_home ]]; then
+  export JAVA_HOME="$(/usr/libexec/java_home 2>/dev/null)"        # macOS
+elif command -v java &>/dev/null; then
+  export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(command -v java)")")")"  # Linux (Ubuntu/Arch)
+fi
+[[ -n "$JAVA_HOME" ]] && export INSTALL4J_JAVA_HOME="$JAVA_HOME"
 
 # ─── FZF ──────────────────────────────────────────────────────────────────────
 # Use fd as the default source (respects .gitignore, shows hidden files)
@@ -45,6 +60,10 @@ path=(
   /go/bin
   "$HOME/.kafka/bin"
   "$HOME/.local/bin"
+  "$JAVA_HOME/bin"
   $path
 )
 export PATH
+
+# ─── Rust ─────────────────────────────────────────────────────────────────────
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"

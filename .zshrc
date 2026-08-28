@@ -2,11 +2,6 @@
 # ║  .zshrc                                                                      ║
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 
-# ─── Homebrew ─────────────────────────────────────────────────────────────────
-if [[ -f /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 # ─── Zinit ────────────────────────────────────────────────────────────────────
 ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
 if [[ ! -d $ZINIT_HOME ]]; then
@@ -99,6 +94,8 @@ alias mv='mv -iv'
 
 # ── Better defaults ───────────────────────────────────────────────────────────
 alias grep='rg'
+# Custom themes in .config/bat/themes/ need a one-time cache build to be found
+[[ -d "$HOME/.config/bat/themes" && ! -f "$HOME/.cache/bat/themes.bin" ]] && bat cache --build &>/dev/null
 alias cat='bat'
 alias vim='nvim'
 alias diff='delta'                  # use delta for diffs
@@ -292,18 +289,6 @@ colors() {
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
-# ─── Java ─────────────────────────────────────────────────────────────────────
-if [[ -x /usr/libexec/java_home ]]; then
-  export JAVA_HOME="$(/usr/libexec/java_home 2>/dev/null)"
-  export INSTALL4J_JAVA_HOME="$JAVA_HOME"
-  typeset -U path
-  path=("$JAVA_HOME/bin" $path)
-  export PATH
-fi
-
-# ─── Rust ─────────────────────────────────────────────────────────────────────
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-
 # ─── Node (fnm) ───────────────────────────────────────────────────────────────
 # fnm replaces nvm — much faster (Rust-based)
 # Install: brew install fnm
@@ -311,5 +296,21 @@ if command -v fnm &>/dev/null; then
   eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
+# ─── Clipboard ────────────────────────────────────────────────────────────────
+# pbcopy/pbpaste are macOS-only; shim them on Linux for the C/P global aliases
+if [[ "$OSTYPE" != darwin* ]] && ! command -v pbcopy &>/dev/null; then
+  if command -v xclip &>/dev/null; then
+    pbcopy() { xclip -selection clipboard }
+    pbpaste() { xclip -selection clipboard -o }
+  elif command -v xsel &>/dev/null; then
+    pbcopy() { xsel --clipboard --input }
+    pbpaste() { xsel --clipboard --output }
+  elif command -v wl-copy &>/dev/null; then
+    pbcopy() { wl-copy }
+    pbpaste() { wl-paste }
+  fi
+fi
+
 # ─── Secrets ──────────────────────────────────────────────────────────────────
 [[ -f "$HOME/.zsh_secret" ]] && source "$HOME/.zsh_secret"
+command -v direnv &>/dev/null && eval "$(direnv hook zsh)"

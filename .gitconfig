@@ -1,6 +1,6 @@
 [user]
-    name = u238748
-    email = nico.ambrosini@sbb.ch
+    name = nambrosini
+    email = 35541122+nambrosini@users.noreply.github.com
     signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrTBzV8luRjixzPrLg4M2zZzRhDVh5RSEATpasj86Mp
 
 [column]
@@ -13,8 +13,7 @@
     sort = version:refname
 
 [init]
-    defaultBranch = master
-    templatedir = ~/.git_template
+    defaultBranch = main
 
 [diff]
     algorithm = histogram

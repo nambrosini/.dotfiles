@@ -296,6 +296,39 @@ if command -v fnm &>/dev/null; then
   eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
+# ─── Rust (rustup/cargo completions) ──────────────────────────────────────────
+# cargo's own _cargo completion (loaded via fpath below, not eval'd) ends in
+# a bare self-call that only works from a real completion context, so it
+# must be autoloaded lazily rather than sourced eagerly here.
+if command -v rustc &>/dev/null; then
+  fpath+=("$(rustc --print sysroot)/share/zsh/site-functions")
+fi
+# zinit defers compinit until idle (turbo mode); force it now so compdef
+# and the fpath addition above are picked up before rustup's own eval runs.
+(( $+functions[compdef] )) || { autoload -Uz compinit && compinit -C }
+if command -v rustup &>/dev/null; then
+  eval "$(rustup completions zsh)"
+fi
+
+# cargo's bundled zsh completion never wires up `--bin` names for `cargo run`;
+# patch _cargo to complete them via `cargo metadata`. Deferred until the
+# first real Tab press: forcing _cargo to load+run outside an actual
+# completion context trips its internal `_arguments` guard.
+if command -v cargo &>/dev/null && command -v jq &>/dev/null; then
+  _cargo_bin_names() {
+    local -a names
+    names=(${(f)"$(cargo metadata --no-deps --format-version=1 2>/dev/null \
+      | jq -r '.packages[].targets[] | select(.kind[] == "bin") | .name')"})
+    _describe 'binary' names
+  }
+  _cargo_patch_bin_completion() {
+    compdef _cargo cargo
+    _cargo "$@"
+    functions[_cargo]="${functions[_cargo]//--bin=\[name of the bin target\]:name/--bin=[name of the bin target]:name:_cargo_bin_names}"
+  }
+  compdef _cargo_patch_bin_completion cargo
+fi
+
 # ─── Clipboard ────────────────────────────────────────────────────────────────
 # pbcopy/pbpaste are macOS-only; shim them on Linux for the C/P global aliases
 if [[ "$OSTYPE" != darwin* ]] && ! command -v pbcopy &>/dev/null; then

@@ -18,13 +18,13 @@ palette:
   terminal-yellow: "#e0af68"
   white-blue: "#a9b1d6"
 secondary_prompt:
-  template: "➜ "
+  template: "→ "
   foreground: p:terminal-blue
   background: transparent
 transient_prompt:
-  template: "➜ "
+  template: "→ "
   foreground: p:terminal-blue
-  background: p:t-background
+  background: transparent
 terminal_background: p:t-background
 console_title_template: " {{ .Folder }} :: {{if .Root}}Admin{{end}}"
 upgrade:
@@ -36,78 +36,96 @@ blocks:
   - type: prompt
     alignment: left
     segments:
-      - template: "➜ "
-        foreground: p:terminal-blue
-        background: transparent
-        type: text
-        style: plain
-      - template: "{{ .HostName }} "
+      - template: " {{ .Icon }} "
+        foreground: p:main-bg
+        background: p:terminal-blue
+        type: os
+        style: powerline
+        powerline_symbol: ""
+      - template: "  {{ .HostName }} "
         foreground: p:terminal-white
-        background: transparent
+        background: p:terminal-black
         type: session
-        style: plain
-      - template: <b>{{ .Path }}</b> <p:light-sky-blue>⚡</>
-        foreground: p:terminal-magenta
+        style: powerline
+        powerline_symbol: ""
+      - template: "  <b>{{ .Path }}</b> "
+        foreground: p:main-bg
+        background: p:terminal-magenta
         type: path
-        style: plain
-      - template: "\U000f10fe <b>{{ .Context }}{{ if .Namespace }}::{{ .Namespace }}{{ end }}</b> "
-        foreground: p:pistachio-green
+        style: powerline
+        powerline_symbol: ""
+      - template: " \U000f10fe <b>{{ $c := splitList \"-\" .Cluster }}{{ if ge (len $c) 2 }}{{ index $c 1 }}{{ else }}{{ .Cluster }}{{ end }}{{ if .Namespace }}::{{ .Namespace }}{{ end }}</b> "
+        foreground: p:main-bg
+        background: p:pistachio-green
         type: kubectl
-        style: plain
-        options:
+        style: powerline
+        powerline_symbol: ""
+        properties:
           parse_kubeconfig: true
-          cluster_aliases:
-            api-kafka04t-sbb-aws-test-net:6443: kafka04t
-          context_aliases:
-            kafka-connect-dev01/api-kafka04t-sbb-aws-test-net:6443/u238748: kafka04t
+          display_error: false
       - type: git
-        style: plain
-        foreground: "p:light-sky-blue"
+        style: powerline
+        powerline_symbol: ""
+        foreground: p:main-bg
+        background: p:terminal-yellow
         template:
-          "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus
-          }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and
-          (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} 
-          {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{
-          end }}"
-        options:
+          " {{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus
+          }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and
+          (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}
+          {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{
+          end }} "
+        properties:
           fetch_status: true
           fetch_upstream_icon: true
           mapped_branches:
             feat/*: "🚀 "
             bug/*: "🐛 "
-      - template: " \uf00d"
-        foreground: p:terminal-red
+      - template: "  "
+        foreground: p:main-bg
+        background: p:terminal-red
         type: status
-        style: plain
+        style: powerline
+        powerline_symbol: ""
   - type: prompt
     alignment: right
     overflow: hide
     segments:
-      - template: "\ue718 {{ .Full }} "
+      - template: "  {{ .Full }} "
         foreground: p:pistachio-green
+        background: transparent
         type: node
         style: plain
-      - template:  {{ .Full }}
+      - template: "  {{ .Full }} "
         foreground: p:terminal-yellow
+        background: transparent
         type: python
         style: plain
-      - template:  {{ .Full}}
+      - template: "  {{ .Full }} "
         foreground: p:terminal-red
+        background: transparent
         type: java
         style: plain
-      - template:  {{ .Full}}
-        foreground: p:terminal-red
+      - template: "  {{ .Full }} "
+        foreground: p:terminal-white
+        background: transparent
         type: rust
         style: plain
-      - template: ﳑ {{ .Full}}
+      - template: "  {{ .Full }} "
         foreground: p:light-sky-blue
+        background: transparent
         type: go
         style: plain
   - type: prompt
     alignment: left
     segments:
-      - template: ▶
+      - template: " ▶ "
+        foreground: p:main-bg
+        background: p:pistachio-green
+        type: text
+        style: plain
+      - template: ""
         foreground: p:pistachio-green
+        background: transparent
         type: text
         style: plain
     newline: true

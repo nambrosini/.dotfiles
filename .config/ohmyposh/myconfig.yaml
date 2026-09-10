@@ -25,7 +25,7 @@ transient_prompt:
   template: "→ "
   foreground: p:terminal-blue
   background: transparent
-terminal_background: p:t-background
+terminal_background: p:terminal-blue
 console_title_template: " {{ .Folder }} :: {{if .Root}}Admin{{end}}"
 upgrade:
   source: cdn
@@ -41,7 +41,7 @@ blocks:
         background: p:terminal-blue
         type: os
         style: powerline
-        powerline_symbol: ""
+        powerline_symbol: ""
       - template: "  {{ .HostName }} "
         foreground: p:terminal-white
         background: p:terminal-black

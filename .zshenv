@@ -70,3 +70,5 @@ export PATH
 
 # ─── ESP32 ────────────────────────────────────────────────────────────────────
 [[ -f "$HOME/export-esp.sh" ]] && . "$HOME/export-esp.sh"
+
+[[ -f "$HOME/.bitwarden-ssh-agent.sock" ]] && export SSH_AUTH_SOCK=/Users/nambrosini/.bitwarden-ssh-agent.sock

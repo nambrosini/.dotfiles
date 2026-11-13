@@ -1,0 +1,11 @@
+manager:
+  memory_budget_gb: 24
+  idle_unload_seconds: 900
+
+models:
+  - name: study
+    path: mlx-community/Qwen3.6-35B-A3B-4bit
+    estimated_memory_gb: 19
+  - name: code
+    path: mlx-community/Qwen3-Coder-30B-A3B-Instruct-4bit
+    estimated_memory_gb: 18

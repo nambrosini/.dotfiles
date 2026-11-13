@@ -2,7 +2,7 @@ theme = "gruvbox"
 applied_migrations = [
     "bash_read_only_defaults_v1",
 ]
-active_model = "mistral-large-4-0-3"
+active_model = "mistral-large-4"
 
 [[models]]
 name = "mistral-large-4"
@@ -121,12 +121,14 @@ allowlist = [
     "uname",
     "uniq",
     "unzip",
+    "vibe-path:exact:/Applications",
     "vibe-path:exact:/Users/nambrosini/Obsidian",
     "vibe-path:exact:/Users/nambrosini/Obsidian/02 Areas/Hattrick",
     "vibe-path:exact:/Users/nambrosini/Obsidian/02 Areas/School/Semester 1",
     "vibe-path:exact:/Users/nambrosini/Obsidian/02 Areas/School/Semester 1/AdvAlgDS/Esame",
     "vibe-path:exact:/Users/nambrosini/Obsidian/Templates",
     "vibe-path:exact:/opt/homebrew/bin",
+    "vibe-path:exact:/usr/local/bin",
     "wc",
     "which",
     "whoami",
@@ -167,3 +169,19 @@ permission = "always"
 
 [tools.garmin_get_stats_range]
 permission = "always"
+
+# Local LLM server (vllm-mlx on 127.0.0.1:8080)
+[[providers]]
+name = "local"
+api_base = "http://127.0.0.1:8080/v1"
+api_key_env_var = ""
+
+[[models]]
+name = "study"
+provider = "local"
+alias = "local-study"
+
+[[models]]
+name = "code"
+provider = "local"
+alias = "local-code"

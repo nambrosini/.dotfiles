@@ -1,0 +1,5 @@
+logs/
+cache.toml
+vibehistory
+trusted_folders.toml
+utility_model_cache.json

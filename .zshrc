@@ -388,9 +388,21 @@ alias llm-status='curl -s http://127.0.0.1:8080/v1/status | python3 -c "import j
 # Pi in a podman container, scoped to the current folder, using host-local models
 pi-docker() {
   podman machine start >/dev/null 2>&1
+  for i in $(seq 1 15); do podman info >/dev/null 2>&1 && break; sleep 2; done
   podman image exists pi-local || podman build --platform linux/amd64 -t pi-local ~/.config/pi-container
   podman run -it --rm --platform linux/amd64 \
     -v "$PWD:/work" -w /work \
     -v "$HOME/.config/pi-container/agent:/root/.pi/agent" \
     pi-local "$@"
+}
+
+# Mistral Vibe in a podman container, scoped to the current folder, using host-local models
+vibe-docker() {
+  podman machine start >/dev/null 2>&1
+  for i in $(seq 1 15); do podman info >/dev/null 2>&1 && break; sleep 2; done
+  podman image exists vibe-local || podman build --platform linux/amd64 -t vibe-local ~/.config/vibe-container
+  podman run -it --rm --platform linux/amd64 \
+    -v "$PWD:/work" -w /work \
+    -v "$HOME/.config/vibe-container/vibe:/root/.vibe" \
+    vibe-local --trust "$@"
 }

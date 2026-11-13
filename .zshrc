@@ -384,3 +384,13 @@ export PATH="$PATH:/Users/nambrosini/.lmstudio/bin"
 alias pi-study='pi --model local/study --system-prompt "$(cat ~/.pi/agent/prompts/tutor.md)"'
 alias pi-code='pi --model local/code --system-prompt "$(cat ~/.pi/agent/prompts/coder.md)"'
 alias llm-status='curl -s http://127.0.0.1:8080/v1/status | python3 -c "import json,sys; d=json.load(sys.stdin)[\"model_manager\"]; [print(m[\"id\"], m[\"status\"]) for m in d[\"models\"]]"'
+
+# Pi in a podman container, scoped to the current folder, using host-local models
+pi-docker() {
+  podman machine start >/dev/null 2>&1
+  podman image exists pi-local || podman build --platform linux/amd64 -t pi-local ~/.config/pi-container
+  podman run -it --rm --platform linux/amd64 \
+    -v "$PWD:/work" -w /work \
+    -v "$HOME/.config/pi-container/agent:/root/.pi/agent" \
+    pi-local "$@"
+}

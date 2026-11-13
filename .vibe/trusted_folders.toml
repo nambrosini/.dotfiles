@@ -1,0 +1,8 @@
+trusted = [
+    "/Users/nambrosini/Projects/binbroom",
+    "/Users/nambrosini/Documents/piano-corsa",
+    "/Users/nambrosini/Projects/garmin-dashboard",
+    "/Users/nambrosini/Obsidian/02 Areas/School/Semester 1/AdvAlgDS",
+    "/Users/nambrosini/Obsidian/02 Areas/School/Semester 1/AdvDataMgmt",
+]
+untrusted = []

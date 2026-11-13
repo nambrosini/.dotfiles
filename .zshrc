@@ -20,10 +20,11 @@ zinit wait lucid light-mode for \
     zsh-users/zsh-autosuggestions
 
 # OMZ snippets — load with turbo mode too
+# OMZP::docker is NOT in this list: it is loaded conditionally near the end of
+# this file, only when a real Docker CLI is installed.
 zinit wait lucid for \
   OMZP::aws \
   OMZP::command-not-found \
-  OMZP::docker \
   OMZP::git \
   OMZP::helm \
   OMZP::kubectl \
@@ -145,6 +146,9 @@ alias kge='kubectl get events --sort-by=.lastTimestamp'
 alias kgi='kubectl get ingress'
 
 # ── Docker ────────────────────────────────────────────────────────────────────
+# Whether `docker` maps to a real Docker CLI or to podman is decided at the
+# bottom of this file (compdef only exists after compinit runs) — see the
+# "Docker / podman" section there.
 alias d='docker'
 alias dc='docker compose'
 alias dps='docker ps'
@@ -329,6 +333,29 @@ if command -v cargo &>/dev/null && command -v jq &>/dev/null; then
   compdef _cargo_patch_bin_completion cargo
 fi
 
+# ─── Docker / podman ──────────────────────────────────────────────────────────
+# Use the real Docker CLI when installed; otherwise route `docker` to podman.
+# `command -v docker` alone can't tell the two apart: without real Docker,
+# `docker` is often a podman wrapper script whose --version prints
+# "podman version …" — the version output is the discriminator.
+# This has to run after compinit is forced above (compdef doesn't exist
+# before that).
+if [[ "$(command docker --version 2>/dev/null)" == "Docker version"* ]]; then
+  # Real Docker CLI — the OMZ docker plugin provides aliases + completion.
+  # Loaded eagerly here (turbo registration this late in .zshrc is not
+  # reliable); the plugin sources a local file and shells out only in the
+  # background.
+  zinit snippet OMZP::docker
+elif (( $+commands[podman] )); then
+  # No real Docker — route docker to podman and reuse podman's completion
+  # (Homebrew puts _podman on fpath). OMZP::docker must NOT be loaded here:
+  # its version check can't parse the podman wrapper's output, falls back to
+  # a cp of a completion file that doesn't exist in the zinit snippet, and
+  # prints an error on every shell startup.
+  alias docker='podman'
+  compdef _podman docker
+fi
+
 # ─── Clipboard ────────────────────────────────────────────────────────────────
 # pbcopy/pbpaste are macOS-only; shim them on Linux for the C/P global aliases
 if [[ "$OSTYPE" != darwin* ]] && ! command -v pbcopy &>/dev/null; then
@@ -347,3 +374,8 @@ fi
 # ─── Secrets ──────────────────────────────────────────────────────────────────
 [[ -f "$HOME/.zsh_secret" ]] && source "$HOME/.zsh_secret"
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/nambrosini/.lmstudio/bin"
+# End of LM Studio CLI section
+

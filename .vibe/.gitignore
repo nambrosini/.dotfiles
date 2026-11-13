@@ -1,0 +1,12 @@
+# API keys & credentials — never commit
+.env
+
+# Runtime state, caches, history — kept on disk but not tracked
+logs/
+worktrees/
+shell-tool/
+vibehistory
+cache.toml
+ui_startup_config.json
+*_cache.json
+*.lock

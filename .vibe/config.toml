@@ -1,0 +1,169 @@
+theme = "gruvbox"
+applied_migrations = [
+    "bash_read_only_defaults_v1",
+]
+active_model = "mistral-large-4-0-3"
+
+[[models]]
+name = "mistral-large-4"
+provider = "mistral"
+alias = "mistral-large-4"
+thinking = "medium"
+
+[[models]]
+alias = "glm-5-3"
+name = "zai-glm-5-3"
+provider = "mistral"
+thinking = "high"
+
+[[models]]
+thinking = "high"
+alias = "mistral-large-4-0-3"
+
+[[mcp_servers]]
+name = "garmin"
+transport = "stdio"
+command = "uvx"
+args = [
+    "--python",
+    "3.12",
+    "--from",
+    "git+https://github.com/Taxuspt/garmin_mcp",
+    "garmin-mcp",
+]
+
+[mcp_servers.auth]
+type = "oauth"
+scopes = []
+
+[tools.garmin_get_activities_by_date]
+permission = "always"
+
+[tools.garmin_get_stats]
+permission = "always"
+
+[tools.garmin_get_training_status]
+permission = "always"
+
+[tools.garmin_get_hrv_data]
+permission = "always"
+
+[tools.garmin_get_heart_rate_zones]
+permission = "always"
+
+[tools.garmin_get_race_predictions]
+permission = "always"
+
+[tools.garmin_get_workouts]
+permission = "always"
+
+[tools.garmin_get_endurance_score]
+permission = "always"
+
+[tools.garmin_get_weigh_ins]
+permission = "always"
+
+[tools.bash]
+allowlist = [
+    "apktool",
+    "awk",
+    "basename",
+    "cat",
+    "cd",
+    "cd \"/Users/nambrosini/Obsidian/02 Areas/School/Semester 1/AdvAlgDS\" && python3 .extract_pdf.py \"Materiale/ads03_sortingSelection.pdf\" > .ads03_full.txt 2>&1; head -c 300 .ads03_full.txt; echo; wc -l .ads03_full.txt",
+    "comm",
+    "cut",
+    "date",
+    "diff",
+    "dirname",
+    "du",
+    "echo",
+    "file",
+    "find",
+    "fmt",
+    "fold",
+    "git diff",
+    "git log",
+    "git status",
+    "grep",
+    "grep -o '\"[A-Za-z0-9_ -]*[Tt]imer[A-Za-z0-9_ -]*\"' dumped/stringliteral.json | sort | uniq -c | sort -rn | head -30; echo '----'; tools/venv/bin/python - <<'EOF'\nimport json\ns=json.load(open('dumped/stringliteral.json'))\nprint('total:',len(s))\nvals=[x['Value'] for x in s if isinstance(x,dict)]\nimport re\ncands=[v for v in vals if re.search(r'^(daily|boost|rebirth|warp|cooldown|mission|research|claim|refresh|streak)', v, re.I)]\nfor c in sorted(set(cands))[:80]: print(repr(c))\nEOF",
+    "head",
+    "java",
+    "join",
+    "jq",
+    "less",
+    "ls",
+    "md5sum",
+    "more",
+    "nl",
+    "od",
+    "paste",
+    "pdfinfo",
+    "pwd",
+    "python3",
+    "readlink",
+    "sed",
+    "sha1sum",
+    "sha256sum",
+    "shasum",
+    "sort",
+    "stat",
+    "sum",
+    "tac",
+    "tail",
+    "tailscale",
+    "tools/venv/bin/python - <<'EOF'\nimport json\ns=json.load(open('dumped/script.json'))\nprint('ScriptMetadata sample:', s['ScriptMetadata'][0])\nfor m in s['ScriptMetadata']:\n    if 'installed not from' in str(m.get('Name','')):\n        print(m)\nEOF",
+    "tools/venv/bin/python - <<'EOF'\nimport json\ns=json.load(open('dumped/stringliteral.json'))\nprint(type(s), len(s))\nif isinstance(s, list):\n    print(s[0])\nEOF",
+    "tools/venv/bin/python - <<'EOF'\nimport json, re\nvals=[x['value'] for x in json.load(open('dumped/stringliteral.json'))]\nc=[v for v in vals if re.search(r'timer|cooldown|rebirth|time_', v, re.I)]\nfor v in sorted(set(c))[:100]: print(repr(v))\nEOF",
+    "tools/venv/bin/python - <<'EOF'\nimport sys, json, bisect; sys.path.insert(0,'tools')\nfrom xref import find_bl_targets\ns=json.load(open('dumped/script.json'))\nmethods=sorted(s['ScriptMethod'],key=lambda m:m['Address'])\nmaddrs=[m['Address'] for m in methods]\ndef fn(va):\n    i=bisect.bisect_right(maddrs,va)-1\n    return methods[i]['Name']\nres=find_bl_targets([0x277FA30, 0x277F8EC])\nfor t, sites in res.items():\n    print(hex(t), len(sites))\n    for sc in sites:\n        print('   ', fn(sc*4+0x4000), hex(sc*4+0x4000))\nEOF",
+    "tr",
+    "tree",
+    "uname",
+    "uniq",
+    "unzip",
+    "vibe-path:exact:/Users/nambrosini/Obsidian",
+    "vibe-path:exact:/Users/nambrosini/Obsidian/02 Areas/Hattrick",
+    "vibe-path:exact:/Users/nambrosini/Obsidian/02 Areas/School/Semester 1",
+    "vibe-path:exact:/Users/nambrosini/Obsidian/02 Areas/School/Semester 1/AdvAlgDS/Esame",
+    "vibe-path:exact:/Users/nambrosini/Obsidian/Templates",
+    "vibe-path:exact:/opt/homebrew/bin",
+    "wc",
+    "which",
+    "whoami",
+]
+
+[tools.withings_get_measures]
+permission = "always"
+
+[tools.garmin_get_workout_by_id]
+permission = "always"
+
+[tools.garmin_get_scheduled_workouts]
+permission = "always"
+
+[tools.garmin_get_calendar_events]
+permission = "always"
+
+[tools.garmin_get_activity_splits]
+permission = "always"
+
+[tools.garmin_get_activity]
+permission = "always"
+
+[tools.garmin_get_activity_typed_splits]
+permission = "always"
+
+[tools.garmin_get_activity_hr_in_timezones]
+permission = "always"
+
+[tools.garmin_get_training_effect]
+permission = "always"
+
+[tools.garmin_get_body_battery]
+permission = "always"
+
+[tools.garmin_get_training_readiness]
+permission = "always"
+
+[tools.garmin_get_stats_range]
+permission = "always"

@@ -1,0 +1,9 @@
+# Credentials (OAuth tokens / API keys) — never commit
+agent/auth.json
+
+# Runtime state & caches — kept on disk but not tracked
+agent/sessions/
+agent/npm/
+agent/missions/
+agent/pi-subagents/
+agent/models-store.json

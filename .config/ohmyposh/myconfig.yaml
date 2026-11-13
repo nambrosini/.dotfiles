@@ -1,22 +1,22 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 
 palette:
-  blue-bell: "#9aa5ce"
-  blue-black: "#565f89"
-  celeste-blue: "#b4f9f8"
-  light-sky-blue: "#7dcfff"
-  main-bg: "#24283b"
-  pastal-grey: "#cfc9c2"
-  pistachio-green: "#9ece6a"
+  blue-bell: "#859289"
+  blue-black: "#7a8478"
+  celeste-blue: "#83c092"
+  light-sky-blue: "#83c092"
+  main-bg: "#2d353b"
+  pastal-grey: "#9da9a0"
+  pistachio-green: "#a7c080"
   t-background: p:main-bg
-  terminal-black: "#414868"
-  terminal-blue: "#7aa2f7"
-  terminal-green: "#73daca"
-  terminal-magenta: "#bb9af7"
-  terminal-red: "#f7768e"
-  terminal-white: "#c0caf5"
-  terminal-yellow: "#e0af68"
-  white-blue: "#a9b1d6"
+  terminal-black: "#475258"
+  terminal-blue: "#7fbbb3"
+  terminal-green: "#a7c080"
+  terminal-magenta: "#d699b6"
+  terminal-red: "#e67e80"
+  terminal-white: "#d3c6aa"
+  terminal-yellow: "#dbbc7f"
+  white-blue: "#d3c6aa"
 secondary_prompt:
   template: "→ "
   foreground: p:terminal-blue

@@ -37,10 +37,10 @@ export FZF_DEFAULT_OPTS="
   --bind='ctrl-/:toggle-preview'
   --bind='ctrl-u:preview-half-page-up'
   --bind='ctrl-d:preview-half-page-down'
-  --color=bg+:#292e42,bg:#24283b,spinner:#bb9af7,hl:#f7768e
-  --color=fg:#c0caf5,header:#f7768e,info:#7aa2f7,pointer:#bb9af7
-  --color=marker:#9ece6a,fg+:#c0caf5,prompt:#7aa2f7,hl+:#f7768e
-  --color=selected-bg:#364a82
+  --color=bg+:#3d484d,bg:#2d353b,spinner:#d699b6,hl:#e67e80
+  --color=fg:#d3c6aa,header:#e67e80,info:#7fbbb3,pointer:#d699b6
+  --color=marker:#a7c080,fg+:#d3c6aa,prompt:#7fbbb3,hl+:#e67e80
+  --color=selected-bg:#543a48
 "
 export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :200 {}'"
 export FZF_ALT_C_OPTS="--preview 'ls --color=always {}'"

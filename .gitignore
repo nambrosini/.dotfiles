@@ -6,3 +6,7 @@ id_rsa*
 id_ed25519*
 .netrc
 .DS_Store
+
+# Local LLM artifacts - never commit model weights or the server venv
+.cache/huggingface/
+.local/venvs/

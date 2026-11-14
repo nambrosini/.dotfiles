@@ -4,5 +4,7 @@ trusted = [
     "/Users/nambrosini/Projects/garmin-dashboard",
     "/Users/nambrosini/Obsidian/02 Areas/School/Semester 1/AdvAlgDS",
     "/Users/nambrosini/Obsidian/02 Areas/School/Semester 1/AdvDataMgmt",
+    "/Users/nambrosini/.dotfiles/.config/pi-container",
+    "/Users/nambrosini/.dotfiles/.config/vibe-container",
 ]
 untrusted = []

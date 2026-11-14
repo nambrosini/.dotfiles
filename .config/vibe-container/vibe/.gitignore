@@ -3,3 +3,7 @@ cache.toml
 vibehistory
 trusted_folders.toml
 utility_model_cache.json
+*_cache.json
+.*_cache.json.lock
+ui_startup_config.json
+locks/

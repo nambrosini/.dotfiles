@@ -396,13 +396,17 @@ pi-docker() {
     pi-local "$@"
 }
 
-# Mistral Vibe in a podman container, scoped to the current folder, using host-local models
+# Mistral Vibe in a podman container, scoped to the current folder, using host-local models.
+# The folder is mounted at its real host path (not /work): vibe scopes --continue/--resume
+# by the session's recorded cwd, so mounting every folder at /work would make all folders
+# share one session history.
 vibe-docker() {
   podman machine start >/dev/null 2>&1
   for i in $(seq 1 15); do podman info >/dev/null 2>&1 && break; sleep 2; done
   podman image exists vibe-local || podman build --platform linux/amd64 -t vibe-local ~/.config/vibe-container
   podman run -it --rm --platform linux/amd64 \
-    -v "$PWD:/work" -w /work \
+    -v "$PWD:$PWD" -w "$PWD" \
     -v "$HOME/.config/vibe-container/vibe:/root/.vibe" \
+    -v "$HOME/.garminconnect:/root/.garminconnect" \
     vibe-local --trust "$@"
 }

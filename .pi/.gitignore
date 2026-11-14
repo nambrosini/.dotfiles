@@ -6,4 +6,6 @@ agent/sessions/
 agent/npm/
 agent/missions/
 agent/pi-subagents/
+agent/bin/
+agent/install/
 agent/models-store.json

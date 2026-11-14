@@ -6,7 +6,9 @@ FROM --platform=linux/amd64 python:3.12-slim
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git ca-certificates curl \
     && rm -rf /var/lib/apt/lists/* \
-    && pip install --no-cache-dir mistral-vibe
+    && pip install --no-cache-dir mistral-vibe \
+    && python -m venv /opt/garmin-venv \
+    && /opt/garmin-venv/bin/pip install --no-cache-dir "git+https://github.com/Taxuspt/garmin_mcp"
 
 WORKDIR /work
 ENTRYPOINT ["vibe"]

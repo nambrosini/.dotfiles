@@ -16,10 +16,6 @@ name = "zai-glm-5-3"
 provider = "mistral"
 thinking = "high"
 
-[[models]]
-thinking = "high"
-alias = "mistral-large-4-0-3"
-
 [[mcp_servers]]
 name = "garmin"
 transport = "stdio"
@@ -31,10 +27,6 @@ args = [
     "git+https://github.com/Taxuspt/garmin_mcp",
     "garmin-mcp",
 ]
-
-[mcp_servers.auth]
-type = "oauth"
-scopes = []
 
 [tools.garmin_get_activities_by_date]
 permission = "always"
@@ -122,6 +114,8 @@ allowlist = [
     "uniq",
     "unzip",
     "vibe-path:exact:/Applications",
+    "vibe-path:exact:/Users/nambrosini/.dotfiles",
+    "vibe-path:exact:/Users/nambrosini/.dotfiles/.vibe",
     "vibe-path:exact:/Users/nambrosini/Obsidian",
     "vibe-path:exact:/Users/nambrosini/Obsidian/02 Areas/Hattrick",
     "vibe-path:exact:/Users/nambrosini/Obsidian/02 Areas/School/Semester 1",
@@ -169,19 +163,3 @@ permission = "always"
 
 [tools.garmin_get_stats_range]
 permission = "always"
-
-# Local LLM server (vllm-mlx on 127.0.0.1:8080)
-[[providers]]
-name = "local"
-api_base = "http://127.0.0.1:8080/v1"
-api_key_env_var = ""
-
-[[models]]
-name = "study"
-provider = "local"
-alias = "local-study"
-
-[[models]]
-name = "code"
-provider = "local"
-alias = "local-code"

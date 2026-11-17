@@ -380,10 +380,10 @@ export PATH="$PATH:/Users/nambrosini/.lmstudio/bin"
 # End of LM Studio CLI section
 
 
-# Local LLM setup (vllm-mlx + pi)
+# Local LLM setup (omlx + pi)
 alias pi-study='pi --model local/study --system-prompt "$(cat ~/.pi/agent/prompts/tutor.md)"'
 alias pi-code='pi --model local/code --system-prompt "$(cat ~/.pi/agent/prompts/coder.md)"'
-alias llm-status='curl -s http://127.0.0.1:8080/v1/status | python3 -c "import json,sys; d=json.load(sys.stdin)[\"model_manager\"]; [print(m[\"id\"], m[\"status\"]) for m in d[\"models\"]]"'
+alias llm-status='curl -s http://127.0.0.1:8080/v1/models | python3 -c "import json,sys; [print(m[\"id\"]) for m in json.load(sys.stdin)[\"data\"]]"'
 
 # Pi in a podman container, scoped to the current folder, using host-local models
 pi-docker() {

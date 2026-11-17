@@ -60,6 +60,7 @@ allowlist = [
     "apktool",
     "awk",
     "basename",
+    "cargo --version",
     "cat",
     "cd",
     "cd \"/Users/nambrosini/Obsidian/02 Areas/School/Semester 1/AdvAlgDS\" && python3 .extract_pdf.py \"Materiale/ads03_sortingSelection.pdf\" > .ads03_full.txt 2>&1; head -c 300 .ads03_full.txt; echo; wc -l .ads03_full.txt",
@@ -83,6 +84,7 @@ allowlist = [
     "java",
     "join",
     "jq",
+    "launchctl",
     "less",
     "ls",
     "md5sum",
@@ -116,6 +118,9 @@ allowlist = [
     "vibe-path:exact:/Applications",
     "vibe-path:exact:/Users/nambrosini/.dotfiles",
     "vibe-path:exact:/Users/nambrosini/.dotfiles/.vibe",
+    "vibe-path:exact:/Users/nambrosini/.local/venvs",
+    "vibe-path:exact:/Users/nambrosini/.local/venvs/llm-server/bin",
+    "vibe-path:exact:/Users/nambrosini/Library/LaunchAgents",
     "vibe-path:exact:/Users/nambrosini/Obsidian",
     "vibe-path:exact:/Users/nambrosini/Obsidian/02 Areas/Hattrick",
     "vibe-path:exact:/Users/nambrosini/Obsidian/02 Areas/School/Semester 1",
@@ -162,4 +167,10 @@ permission = "always"
 permission = "always"
 
 [tools.garmin_get_stats_range]
+permission = "always"
+
+[tools.garmin_get_hrv_trend]
+permission = "always"
+
+[tools.garmin_get_stats_and_body]
 permission = "always"

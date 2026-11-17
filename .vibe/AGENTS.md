@@ -1,7 +1,7 @@
 # Delegation guidance
 
 Two local subagents are available, each pinned to its own model served by the
-local vllm-mlx server (127.0.0.1:8080). Spawn them with `agents_spawn` using
+local oMLX server (127.0.0.1:8080). Spawn them with `agents_spawn` using
 their `config_name`:
 
 - `coder` (model `local-code`): delegate all code work — reading, editing,

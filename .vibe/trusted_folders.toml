@@ -6,5 +6,6 @@ trusted = [
     "/Users/nambrosini/Obsidian/02 Areas/School/Semester 1/AdvDataMgmt",
     "/Users/nambrosini/.dotfiles/.config/pi-container",
     "/Users/nambrosini/.dotfiles/.config/vibe-container",
+    "/Users/nambrosini/.dotfiles",
 ]
 untrusted = []

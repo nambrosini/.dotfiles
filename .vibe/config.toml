@@ -90,6 +90,7 @@ allowlist = [
     "md5sum",
     "more",
     "nl",
+    "nvim",
     "od",
     "paste",
     "pdfinfo",

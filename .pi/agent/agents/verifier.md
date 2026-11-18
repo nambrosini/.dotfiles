@@ -1,0 +1,1 @@
+/Users/nambrosini/.pi/agent/git/github.com/nambrosini/pi-orchestrator/agents/verifier.md

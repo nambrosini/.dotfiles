@@ -61,6 +61,7 @@ path=(
   "$HOME/.kafka/bin"
   "$HOME/.local/bin"
   "$JAVA_HOME/bin"
+  "$HOME/.config/emacs/bin"
   $path
 )
 export PATH

@@ -32,6 +32,12 @@
           "contextWindow": 65536,
           "maxTokens": 16384,
           "samplingParams": { "temperature": 0.2, "top_p": 0.8 }
+        },
+        {
+          "id": "Inkling-2-Mini-oQ4e-mtp",
+          "name": "Inkling-2-Mini-oQ4e-mtp",
+          "reasoning": true,
+          "input": ["text"]
         }
       ]
     }

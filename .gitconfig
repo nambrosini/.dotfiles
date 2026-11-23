@@ -54,7 +54,7 @@
 [delta]
     navigate = true
     dark = true
-    syntax-theme = Everforest
+    syntax-theme = Gruvbox
     line-numbers = true
     side-by-side = true
 

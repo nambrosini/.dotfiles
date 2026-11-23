@@ -162,6 +162,7 @@ alias reload='source ~/.zshrc'      # reload config
 alias zrc='$EDITOR ~/.zshrc'        # quick edit
 alias zenv='$EDITOR ~/.zshenv'
 alias path='echo $PATH | tr ":" "\n" | nl'  # readable PATH
+alias emacs="emacsclient -c -a 'emacs'"
 
 # ── Suffix aliases ────────────────────────────────────────────────────────────
 alias -s md='bat'
@@ -410,3 +411,9 @@ vibe-docker() {
     -v "$HOME/.garminconnect:/root/.garminconnect" \
     vibe-local --trust "$@"
 }
+# oMLX: CLI shim path begin
+case ":$PATH:" in
+  *":$HOME/.omlx/bin:"*) ;;
+  *) export PATH="$HOME/.omlx/bin:$PATH" ;;
+esac
+# oMLX: CLI shim path end

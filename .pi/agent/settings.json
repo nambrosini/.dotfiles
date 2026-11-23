@@ -9,7 +9,7 @@
     "git:github.com/nambrosini/pi-orchestrator"
   ],
   "extensionChangelogVersions": {
-    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.89.0"
+    "{\"source\":\"npm:pi-subagents\",\"scope\":\"user\"}": "0.89.1"
   },
   "orchestrator": {
     "orchestratorModel": "local/Qwen3.6-35B-A3B-MLX-4bit",

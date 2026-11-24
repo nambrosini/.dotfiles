@@ -153,3 +153,7 @@ Projects can still target any JDK; jdtls reads that from Maven/Gradle.")
 (after! org
   (setq org-directory "~/org/"
         org-agenda-files (directory-files-recursively org-directory "\\.org$")))
+
+(use-package org-modern
+  :hook (org-mode . org-modern-mode))
+(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)

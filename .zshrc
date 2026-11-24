@@ -376,41 +376,6 @@ fi
 [[ -f "$HOME/.zsh_secret" ]] && source "$HOME/.zsh_secret"
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/nambrosini/.lmstudio/bin"
-# End of LM Studio CLI section
-
-
-# Local LLM setup (omlx + pi)
-alias pi-study='pi --model local/study --system-prompt "$(cat ~/.pi/agent/prompts/tutor.md)"'
-alias pi-code='pi --model local/code --system-prompt "$(cat ~/.pi/agent/prompts/coder.md)"'
-alias llm-status='curl -s http://127.0.0.1:8080/v1/models | python3 -c "import json,sys; [print(m[\"id\"]) for m in json.load(sys.stdin)[\"data\"]]"'
-
-# Pi in a podman container, scoped to the current folder, using host-local models
-pi-docker() {
-  podman machine start >/dev/null 2>&1
-  for i in $(seq 1 15); do podman info >/dev/null 2>&1 && break; sleep 2; done
-  podman image exists pi-local || podman build --platform linux/amd64 -t pi-local ~/.config/pi-container
-  podman run -it --rm --platform linux/amd64 \
-    -v "$PWD:/work" -w /work \
-    -v "$HOME/.config/pi-container/agent:/root/.pi/agent" \
-    pi-local "$@"
-}
-
-# Mistral Vibe in a podman container, scoped to the current folder, using host-local models.
-# The folder is mounted at its real host path (not /work): vibe scopes --continue/--resume
-# by the session's recorded cwd, so mounting every folder at /work would make all folders
-# share one session history.
-vibe-docker() {
-  podman machine start >/dev/null 2>&1
-  for i in $(seq 1 15); do podman info >/dev/null 2>&1 && break; sleep 2; done
-  podman image exists vibe-local || podman build --platform linux/amd64 -t vibe-local ~/.config/vibe-container
-  podman run -it --rm --platform linux/amd64 \
-    -v "$PWD:$PWD" -w "$PWD" \
-    -v "$HOME/.config/vibe-container/vibe:/root/.vibe" \
-    -v "$HOME/.garminconnect:/root/.garminconnect" \
-    vibe-local --trust "$@"
-}
 # oMLX: CLI shim path begin
 case ":$PATH:" in
   *":$HOME/.omlx/bin:"*) ;;

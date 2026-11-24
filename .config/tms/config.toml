@@ -1,3 +1,11 @@
 [[search_dirs]]
-path = "/Users/nambrosini/personal"
+path = "/home/nambrosini/Projects"
+depth = 10
+
+[[search_dirs]]
+path = "/home/nambrosini/.dotfiles"
+depth = 10
+
+[[search_dirs]]
+path = "/home/nambrosini/.config/nvim"
 depth = 10

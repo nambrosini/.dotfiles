@@ -53,15 +53,21 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(after! org
+  (map! :map org-mode-map
+        :n "M-j" #'org-metadown
+        :n "M-k" #'org-metaup
+        :n "M-j" #'org-metaleft
+        :n "M-h" #'org-metaright)
+  (setq org-directory "~/org/"
+        org-log-done 'time
+        org-log-into-drawer t
+        org-agenda-files (list "~/org/school.org"
+                                "~/org/home.org"
+                                "~/org/work.org")))
 
-;; Record a CLOSED timestamp when a TODO is marked DONE (default is nil).
-(setq org-log-done 'time)
-;; Keep the CLOSED line inside a :LOGBOOK: drawer instead of loose below the heading.
-(setq org-log-into-drawer t)
-;; Set agenda files
-(setq org-agenda-files (list "~/org/school.org"
-                             "~/org/home.org"))
+(after! projectile
+  (setq projectile-project-search-path '("~/work")))
 
 ;; Corfu shows candidates in a child frame, which terminal Emacs (emacsclient
 ;; -t) doesn't support on Emacs < 31, so as-you-type completion never fires
@@ -69,7 +75,14 @@
 ;; `corfu-terminal-disable-on-gui' (t by default) keeps the child-frame popup
 ;; in GUI frames.
 (after! corfu
-  (corfu-terminal-mode +1))
+  (corfu-terminal-mode +1)
+  ;; Pop up completion quickly (Doom defaults: delay 0.24s, prefix 2).
+  (setq corfu-auto-delay 0.05
+        corfu-auto-prefix 1))
+
+;; LSP/eglot may also be slow: don't wait on idle timers.
+(after! eglot (setq eglot-send-changes-idle-time 0.1))
+(after! lsp-mode (setq lsp-idle-delay 0.1))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -106,3 +119,37 @@
 ;;Compilation command on save for rust
 (after! rustic
   (setq rustic-format-on-save t))
+
+;;; Java: jdtls via eglot.
+;; Doom's :lang java module only wires up lsp-mode, so with (lsp +eglot) nothing
+;; starts a server for Java buffers. Hook eglot in and configure jdtls here.
+(defvar +java-jdtls-java
+  "/opt/homebrew/opt/openjdk@25/libexec/openjdk.jdk/Contents/Home/bin/java"
+  "JDK used to *run* jdtls. jdtls 1.63+ requires Java 25 (osgi.ee=JavaSE 25);
+it fails with exit status 13 on older JDKs. 25 is LTS.
+Projects can still target any JDK; jdtls reads that from Maven/Gradle.")
+
+;; Update with:
+;;   curl -fL -o ~/.local/share/lombok/lombok.jar https://projectlombok.org/downloads/lombok.jar
+(defvar +java-lombok-jar
+  (or (let ((f (expand-file-name "~/.local/share/lombok/lombok.jar")))
+        (and (file-exists-p f) f))
+      (car (last (sort (file-expand-wildcards
+                        "~/.m2/repository/org/projectlombok/lombok/1.18.*/lombok-1.18.*.jar" t)
+                       #'version<))))
+  "Lombok jar passed to jdtls as a javaagent.")
+
+(add-hook! '(java-mode-local-vars-hook java-ts-mode-local-vars-hook)
+           #'eglot-ensure)
+
+(after! eglot
+  (setf (alist-get '(java-mode java-ts-mode) eglot-server-programs nil nil #'equal)
+        `("jdtls"
+          ,(concat "--java-executable=" +java-jdtls-java)
+          ,@(when +java-lombok-jar
+              (list (concat "--jvm-arg=-javaagent:"
+                            (expand-file-name +java-lombok-jar)))))))
+
+(after! org
+  (setq org-directory "~/org/"
+        org-agenda-files (directory-files-recursively org-directory "\\.org$")))

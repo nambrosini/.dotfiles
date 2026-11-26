@@ -1,0 +1,9 @@
+#+TITLE: {{MODULE}} — {{LESSON}}: Self Test
+#+FILETAGS: :{{MODULE}}:{{LESSON}}:test:
+#+STARTUP: overview
+#+PROPERTY: header-args :results value raw :eval no-export
+
+* Questions
+** Q1:
+#+BEGIN_ANSWER
+#+END_ANSWER

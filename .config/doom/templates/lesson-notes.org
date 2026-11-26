@@ -1,0 +1,12 @@
+#+TITLE: {{MODULE}} — {{LESSON}}: Lecture Notes
+#+FILETAGS: :{{MODULE}}:{{LESSON}}:notes:
+#+STARTUP: content indent
+#+STARTUP: logdone
+#+TODO: TODO | DONE
+#+PROPERTY: header-args :results output
+
+* Overview
+- Date:
+- Lecturer:
+
+* Sections

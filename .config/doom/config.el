@@ -23,13 +23,24 @@
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18))
+
+;; Faces
+(setq doom-font
+      (font-spec :family "JetBrainsMono Nerd Font" :size 18
+                 :weight 'semi-light)
+      doom-big-font
+      (font-spec :family "JetBrainsMono Nerd Font" :size 22)
+      doom-serif-font
+      (font-spec :family "JetBrainsMono Nerd Font" :weight 'light)
+      doom-variable-pitch-font
+      (font-spec :family "JetBrainsMono Nerd Font" :size 18))
 
 ;; nerd-icons defaults to "Symbols Nerd Font Mono", which isn't installed on
 ;; this machine; use the installed JetBrainsMono Nerd Font so icons in the
 ;; modeline, dired, dashboard etc. render instead of tofu boxes.
 (setq nerd-icons-font-family "JetBrainsMono Nerd Font")
-;;
+(setq doom-nerd-icons-font-family "JetBrainsMono Nerd Font")
+
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -38,7 +49,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme '(doom-gruvbox    . doom-gruvbox-light))
+(setq doom-theme '(modus-vivendi . modus-operandi))
 ;; Specify both a dark and light theme, like so and Doom will choose which one
 ;; to load based on your system light/dark setting:
 ;;
@@ -62,9 +73,8 @@
   (setq org-directory "~/org/"
         org-log-done 'time
         org-log-into-drawer t
-        org-agenda-files (list "~/org/school.org"
-                                "~/org/home.org"
-                                "~/org/work.org")))
+        org-agenda-files (directory-files-recursively org-directory "\\.org$")
+        org-modern-star '("◉" "○" "◈" "◇" "*")))
 
 (after! projectile
   (setq projectile-project-search-path '("~/work")))
@@ -150,10 +160,94 @@ Projects can still target any JDK; jdtls reads that from Maven/Gradle.")
               (list (concat "--jvm-arg=-javaagent:"
                             (expand-file-name +java-lombok-jar)))))))
 
-(after! org
-  (setq org-directory "~/org/"
-        org-agenda-files (directory-files-recursively org-directory "\\.org$")))
-
 (use-package org-modern
   :hook (org-mode . org-modern-mode))
 (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
+;;; Study file templates --------------------------------------------
+
+(defvar my/study-root "~/org/school/"
+  "Root folder containing one folder per module.")
+
+(defvar my/study-templates
+  '(("Lesson notes"  . ("~/.config/doom/templates/lesson-notes.org"  "Lessons"))
+    ("Active recall" . ("~/.config/doom/templates/active-recall.org" "Reviews"))
+    ("Self-test"     . ("~/.config/doom/templates/self-test.org"     "Self-Test"))))
+
+(defun my/new-study-file ()
+  "Prompt for module, template and file name; create a new org file
+from the chosen template in the module's subfolder."
+  (interactive)
+  (let* ((all-entries (directory-files my/study-root t nil nil))
+         (dirs (seq-filter #'file-directory-p all-entries))
+         (modules (seq-remove
+                   (lambda (d) (string-match-p "/\\.\\.?$" d))
+                   (mapcar #'file-name-nondirectory dirs)))
+         (module (completing-read "Module: " modules nil nil))
+         (choice (completing-read "Template: " (mapcar #'car my/study-templates)))
+         (tpl (cdr (assoc choice my/study-templates)))
+         (dir (expand-file-name (cadr tpl)
+                                (expand-file-name module my/study-root)))
+         (lesson (read-string "Lesson (e.g. l3, blank to skip): "))
+         (file (read-string (format "File name (in %s): " dir)))
+         (path (expand-file-name file dir)))
+    (when (file-exists-p path)
+      (user-error "File already exists: %s" path))
+    (make-directory dir t)
+    (with-temp-file path
+      (insert-file-contents (car tpl))
+      (goto-char (point-min))
+      (while (search-forward "{{MODULE}}" nil t)
+        (replace-match module t t))
+      (goto-char (point-min))
+      (while (search-forward "{{LESSON}}" nil t)
+        (replace-match lesson t t)))
+    (find-file path)))
+
+(map! :leader :desc "New study file" "n b" #'my/new-study-file)
+
+;; package.el / M-x package-install RET org-pomodoro RET
+(use-package org-pomodoro
+  :config
+  (setq org-pomodoro-length 25
+        org-pomodoro-short-break-length 5
+        org-pomodoro-long-break-length 30
+        ;; clock into the heading when pomodoro starts
+        org-pomodoro-start-to-clock t
+        org-pomodoro-finished-to-clock-out t
+        org-pomodoro-play-sounds t
+        org-pomodoro-audio-player "mpv"
+        org-pomodoro-audio-working-sound "~/.config/emacs/.local/straight/repos/org-pomodoro/resources/bell.wav"
+        org-pomodoro-audio-overtime-sound "~/.config/emacs/.local/straight/repos/org-pomodoro/resources/bell.wav"
+        org-pomodoro-audio-break-sound "~/.config/emacs/.local/straight/repos/org-pomodoro/resources/bell-multiple.wav")
+        org-pomodoro-ticking-sound "~/.config/emacs/.local/straight/repos/org-pomodoro/resources/tick.wav"
+  :bind ("C-c C-p" . org-pomodoro))
+
+(use-package alert
+  :config
+  ;; Linux: DBus notifications; macOS: terminal-notifier; Windows: toast
+  (setq alert-default-style 'notifications)) ; GNU/Linux
+
+(global-set-key (kbd "C-x C-b") #'ibuffer)
+
+;; ----------- ;;
+;; -- vterm -- ;;
+;; ----------- ;;
+
+(use-package vterm
+  :ensure t
+  :bind (("C-c v" . vterm)
+         :map vterm-mode-map
+         ("M-p" . vterm-send-up)      ;; Replicates standard shell/ESS history up
+         ("M-n" . vterm-send-down)    ;; Replicates standard shell/ESS history down
+         ("C-c c" . vterm-copy-mode)) ;; Quick toggle for Emacs text selection
+  :custom
+  (vterm-max-scrollback 100000)       ;; Critical: prevents truncation of long AI outputs
+  (vterm-kill-buffer-on-exit t)
+  :config
+  ;; Enforce a distinct, high-contrast dark canvas for the terminal buffer
+  (add-hook 'vterm-mode-hook
+            (lambda ()
+              (face-remap-add-relative 'default :background "#263238"))))
+
+(global-set-key (kbd "s-!") 'shell-command)

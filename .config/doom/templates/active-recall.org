@@ -1,0 +1,8 @@
+#+TITLE: {{MODULE}} — {{LESSON}}: Active Recall
+#+FILETAGS: :{{MODULE}}:{{LESSON}}:recall:
+#+STARTUP: overview hidestars
+#+TODO: REMEMBERED | SOLID FUZZY BLANK
+#+STARTUP: showeverything
+
+* Recall log
+| Date | Status |
